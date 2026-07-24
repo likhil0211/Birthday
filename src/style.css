@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { -webkit-tap-highlight-color: transparent; }
+html, body, #root { height: 100%; }
+body { @apply bg-ink text-white font-sans overflow-x-hidden; }
+
+.glass {
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #d4af37, #ff5e9e 55%, #8b3ff0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.btn-primary {
+  @apply glass px-8 py-3 rounded-full font-medium tracking-wide text-sm uppercase;
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+.btn-primary:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 10px 30px rgba(212,175,55,0.25); }
+
+.section-title {
+  @apply font-display text-4xl md:text-6xl text-center gradient-text mb-4;
+}
+
+@keyframes floatUp {
+  0%   { transform: translateY(110vh) translateX(0) rotate(0deg); opacity: 0; }
+  10%  { opacity: .9; }
+  90%  { opacity: .6; }
+  100% { transform: translateY(-10vh) translateX(var(--drift)) rotate(360deg); opacity: 0; }
+}
+.heart {
+  position: absolute;
+  bottom: 0;
+  animation: floatUp linear infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes blobMove {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  33% { transform: translate(6%, -8%) scale(1.15); }
+  66% { transform: translate(-8%, 6%) scale(0.9); }
+}
+.blob { animation: blobMove 18s ease-in-out infinite; will-change: transform; }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
